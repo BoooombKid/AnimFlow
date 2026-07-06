@@ -57,7 +57,7 @@ export function PipelinePreview({ pipeline, expandedStages, onToggleStage }) {
                 <span className="stage-name">{displayName}</span>
                 <span className="readme-indicator">
                   <FileText aria-hidden="true" />
-                  README.md
+                  README.txt
                 </span>
               </button>
               {expanded && <ChildPreview children={stage.children} />}

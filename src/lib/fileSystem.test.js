@@ -75,12 +75,12 @@ describe("file system generation", () => {
       description: "Animation blocking for shot sc001.",
     });
 
-    expect(readme).toContain("# HM_blocking_sc001");
+    expect(readme).toContain("HM_blocking_sc001\n=================");
     expect(readme).toContain("3D Animation");
     expect(readme).toContain("Animation blocking for shot sc001.");
   });
 
-  it("creates the hierarchy and a README in every generated folder", async () => {
+  it("creates the hierarchy and a README.txt in every generated folder", async () => {
     const destination = new MemoryDirectoryHandle("Projects");
     const pipeline = getPipelineTemplate("3d", 1).slice(0, 2);
     const onProgress = vi.fn();
@@ -98,9 +98,10 @@ describe("file system generation", () => {
     const layout = project.directories.get("02_Layout");
     const shot = layout.directories.get("HM_layout_sc001");
 
-    expect(project.files.has("README.md")).toBe(true);
-    expect(asset.files.has("README.md")).toBe(true);
-    expect(shot.files.has("README.md")).toBe(true);
+    expect(project.files.has("README.txt")).toBe(true);
+    expect(asset.files.has("README.txt")).toBe(true);
+    expect(shot.files.has("README.txt")).toBe(true);
+    expect(project.files.has("README.md")).toBe(false);
     expect(result.foldersCreated).toBe(onProgress.mock.calls.length);
   });
 

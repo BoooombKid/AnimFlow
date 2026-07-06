@@ -3,7 +3,7 @@
   "private": true,
   "version": "1.0.0",
   "type": "module",
-  "description": "Create production-ready animation project folders and README files from the browser.",
+  "description": "Create production-ready animation project folders and plain-text README files from the browser.",
   "scripts": {
     "dev": "vite",
     "build": "vite build",

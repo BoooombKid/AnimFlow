@@ -1,6 +1,6 @@
 # AnimFlow
 
-AnimFlow is an open-source browser tool that creates production-ready animation project folders directly on your computer. Enter a project name, choose a pipeline type, select a destination, and AnimFlow builds the complete folder tree with a `README.md` in every folder.
+AnimFlow is an open-source browser tool that creates production-ready animation project folders directly on your computer. Enter a project name, choose a pipeline type, select a destination, and AnimFlow builds the complete folder tree with a plain-text `README.txt` in every folder.
 
 **Live app:** [https://boooombkid.github.io/AnimFlow/](https://boooombkid.github.io/AnimFlow/)
 
@@ -9,7 +9,7 @@ AnimFlow is an open-source browser tool that creates production-ready animation 
 - 3D animation, 2D animation, and stop-motion templates
 - Configurable shot count with consistent `sc001` naming
 - Direct local folder creation through the File System Access API
-- A purpose-written `README.md` in every generated folder
+- A purpose-written `README.txt` in every generated folder
 - Live pipeline preview before anything is written
 - Existing-project protection: AnimFlow will not overwrite a folder with the same project name
 - Responsive interface for desktop and mobile Chromium browsers
@@ -40,7 +40,7 @@ pnpm build
 1. The selected pipeline template creates numbered production stages.
 2. Shot-based stages use the configured shot count and three-digit shot IDs.
 3. Shared assets remain outside shot folders to avoid duplication.
-4. Every generated directory receives a contextual `README.md` with its purpose, usage rules, and naming guidance.
+4. Every generated directory receives a contextual plain-text `README.txt` with its purpose, usage rules, and naming guidance.
 
 See [Pipeline Templates](docs/PIPELINE_TEMPLATES.md) for the full structure of each project type.
 
