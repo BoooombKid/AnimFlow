@@ -26,8 +26,8 @@ export default function App() {
 
   const numericShotCount = Math.min(999, Math.max(1, Number(shotCount) || 1));
   const pipeline = useMemo(
-    () => getPipelineTemplate(projectType, numericShotCount),
-    [projectType, numericShotCount],
+    () => getPipelineTemplate(projectType, numericShotCount, projectName),
+    [projectType, numericShotCount, projectName],
   );
   const isSupported = isFileSystemAccessSupported();
   const canCreate = Boolean(

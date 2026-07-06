@@ -2,13 +2,14 @@ import { describe, expect, it } from "vitest";
 import {
   countFolders,
   getPipelineTemplate,
+  getProjectPrefix,
   getProjectTypeLabel,
 } from "./pipelineTemplates.js";
 
 describe("pipeline templates", () => {
   it("creates twelve ordered stages for every project type", () => {
     for (const type of ["3d", "2d", "stop-motion"]) {
-      const pipeline = getPipelineTemplate(type, 3);
+      const pipeline = getPipelineTemplate(type, 3, "Test Project");
       expect(pipeline).toHaveLength(12);
       expect(pipeline[0].name.startsWith("01_")).toBe(true);
       expect(pipeline.at(-1).name).toBe("12_Final_Delivery");
@@ -16,7 +17,7 @@ describe("pipeline templates", () => {
   });
 
   it("creates the requested number of three-digit 3D layout shots", () => {
-    const layout = getPipelineTemplate("3d", 4)[1];
+    const layout = getPipelineTemplate("3d", 4, "HER MOVE")[1];
     expect(layout.children.map(({ name }) => name)).toEqual([
       "HM_layout_sc001",
       "HM_layout_sc002",
@@ -25,9 +26,21 @@ describe("pipeline templates", () => {
     ]);
   });
 
+  it("derives shot prefixes from single-word and multi-word project names", () => {
+    expect(getProjectPrefix("About")).toBe("About");
+    expect(getProjectPrefix("MY Body")).toBe("MB");
+    expect(getProjectPrefix("  HER   MOVE  ")).toBe("HM");
+    expect(getProjectPrefix("")).toBe("Project");
+
+    const singleWord = getPipelineTemplate("stop-motion", 3, "About")[6];
+    const multiWord = getPipelineTemplate("stop-motion", 3, "MY Body")[6];
+    expect(singleWord.children[2].name).toBe("About_frameqc_sc003");
+    expect(multiWord.children[2].name).toBe("MB_frameqc_sc003");
+  });
+
   it("uses project-type-specific production stages", () => {
-    const twoD = getPipelineTemplate("2d", 1).map(({ name }) => name);
-    const stopMotion = getPipelineTemplate("stop-motion", 1).map(({ name }) => name);
+    const twoD = getPipelineTemplate("2d", 1, "Test").map(({ name }) => name);
+    const stopMotion = getPipelineTemplate("stop-motion", 1, "Test").map(({ name }) => name);
 
     expect(twoD).toContain("05_Rough_Animation");
     expect(twoD).toContain("07_Color");

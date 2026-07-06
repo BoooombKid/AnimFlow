@@ -7,6 +7,7 @@ AnimFlow is an open-source browser tool that creates production-ready animation 
 ## Features
 
 - 3D animation, 2D animation, and stop-motion templates
+- Project-aware shot prefixes: `About_frameqc_sc003` for one-word names and `MB_frameqc_sc003` for `MY Body`
 - Configurable shot count with consistent `sc001` naming
 - Direct local folder creation through the File System Access API
 - A purpose-written `README.txt` in every generated folder
@@ -38,7 +39,7 @@ pnpm build
 ## How folder generation works
 
 1. The selected pipeline template creates numbered production stages.
-2. Shot-based stages use the configured shot count and three-digit shot IDs.
+2. Shot-based stages derive their prefix from the project name and use three-digit shot IDs.
 3. Shared assets remain outside shot folders to avoid duplication.
 4. Every generated directory receives a contextual plain-text `README.txt` with its purpose, usage rules, and naming guidance.
 

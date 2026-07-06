@@ -82,7 +82,7 @@ describe("file system generation", () => {
 
   it("creates the hierarchy and a README.txt in every generated folder", async () => {
     const destination = new MemoryDirectoryHandle("Projects");
-    const pipeline = getPipelineTemplate("3d", 1).slice(0, 2);
+    const pipeline = getPipelineTemplate("3d", 1, "Test Project").slice(0, 2);
     const onProgress = vi.fn();
 
     const result = await createProjectStructure({
@@ -96,7 +96,7 @@ describe("file system generation", () => {
     const project = destination.directories.get("Test Project");
     const asset = project.directories.get("01_Asset");
     const layout = project.directories.get("02_Layout");
-    const shot = layout.directories.get("HM_layout_sc001");
+    const shot = layout.directories.get("TP_layout_sc001");
 
     expect(project.files.has("README.txt")).toBe(true);
     expect(asset.files.has("README.txt")).toBe(true);
@@ -114,7 +114,7 @@ describe("file system generation", () => {
         destinationHandle: destination,
         projectName: "Existing Project",
         projectType: "2d",
-        pipeline: getPipelineTemplate("2d", 1),
+        pipeline: getPipelineTemplate("2d", 1, "Existing Project"),
       }),
     ).rejects.toThrow("already exists");
   });
